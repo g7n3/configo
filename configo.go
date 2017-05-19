@@ -2,7 +2,6 @@ package configo
 
 import (
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -42,10 +41,7 @@ func init() {
 }
 
 func GetSystemSeparator() string {
-	if runtime.GOOS == "windows" {
-		return "\\"
-	}
-	return "/"
+	return SYSTEM_SEPARATOR
 }
 
 func NewDefaultConfig() *Config {
@@ -72,6 +68,11 @@ func NewConfig(path string, args ...CONFIG_TYPE) *Config {
 		Configure: (Common)(defaultConfig),
 	}
 	return conf
+}
+
+func (c *Config) Properties() *Common {
+	c.Load()
+	return &c.Configure
 }
 
 func Load() error {

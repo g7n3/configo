@@ -25,3 +25,14 @@ func TestConfig_Load(t *testing.T) {
 		t.Log("load error", err)
 	}
 }
+func TestGetSystemSeparator(t *testing.T) {
+	t.Log(SYSTEM_SEPARATOR)
+}
+
+func ExampleGet() {
+	fmt.Println(Get("example"))
+}
+
+func ExampleNewConfig() {
+	NewConfig("config.eee").Properties()
+}
