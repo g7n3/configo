@@ -102,8 +102,8 @@ func envStringSplit(s string, sep string) (Property, error) {
 
 }
 
-func envDefaultGet(s string) *Property {
-	if v, ok := (config.Configure).(Default)[s]; ok {
+func envDefaultGet(def Default, s string) *Property {
+	if v, ok := def[s]; ok {
 		return &v
 	}
 	return nil

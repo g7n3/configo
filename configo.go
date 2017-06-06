@@ -106,10 +106,13 @@ func Get(s string) (*Property, error) {
 
 func (c *Config) Get(s string) (*Property, error) {
 	if config.Type == TYPE_DEFAULT {
-		p := envDefaultGet(s)
-		if p != nil {
-			return p, nil
+		if v, ok := c.Configure.(Default); ok {
+			p := envDefaultGet(v, s)
+			if p != nil {
+				return p, nil
+			}
 		}
+
 		return nil, ERROR_CONFIG_GET_PROPERTY
 	}
 	return nil, ERROR_CONFIG_GET_PROPERTY_TYPE
